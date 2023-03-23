@@ -2,53 +2,41 @@ package objeto;
 
 public class Tablero {
 
-	private int filas;
-	private int columnas;
-	private int[] resultadoFilas;
-	private int[] resultadoColumnas;
+	private int dimension;
+	private int[] resultadosFilas;
+	private int[] resultadosColumnas;
 	private int[][] cuadricula;
 
 	public Tablero() {
+		this.cuadricula = new int[4][4];
+		this.resultadosFilas = new int[4];
+		this.resultadosColumnas = new int[4];
+		generarResultadosFilas();
+		generarResultadosColumnas();
 	}
-
-	public int getFilas() {
-		return filas;
+	
+	public Tablero(int tamanio) {
+		this.cuadricula = new int[tamanio][tamanio];
+		this.resultadosFilas = new int[tamanio];
+		this.resultadosColumnas = new int[tamanio];
+		generarResultadosFilas();
+		generarResultadosColumnas();
 	}
-
-	public void setFilas(int filas) {
-		this.filas = filas;
+	
+	public void setCelda(int num, int fila, int col) {
+		
 	}
-
-	public int getColumnas() {
-		return columnas;
+	
+	public boolean sumasCorrectas() {
+		throw new RuntimeException("Método no implementado");
 	}
-
-	public void setColumnas(int columnas) {
-		this.columnas = columnas;
+	
+	private void generarResultadosFilas() {
+		
 	}
-
-	public int[] getResultadoFilas() {
-		return resultadoFilas;
-	}
-
-	public void setResultadoFilas(int[] resultadoFilas) {
-		this.resultadoFilas = resultadoFilas;
-	}
-
-	public int[] getResultadoColumnas() {
-		return resultadoColumnas;
-	}
-
-	public void setResultadoColumnas(int[] resultadoColumnas) {
-		this.resultadoColumnas = resultadoColumnas;
-	}
-
-	public int[][] getCuadricula() {
-		return cuadricula;
-	}
-
-	public void setCuadricula(int[][] cuadricula) {
-		this.cuadricula = cuadricula;
+	
+	private void generarResultadosColumnas() {
+		
 	}
 
 }
