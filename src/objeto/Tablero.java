@@ -15,8 +15,8 @@ public class Tablero {
 		this.cuadricula = new int[4][4];
 		this.resultadosFilas = new int[4];
 		this.resultadosColumnas = new int[4];
-		this.maximoPosible = 9 * this.dimension;
-		this.minimoPosible = dimension;
+		this.maximoPosible = 36;
+		this.minimoPosible = 4;
 		generarResultadosFilas();
 		generarResultadosColumnas();
 	}
@@ -27,6 +27,8 @@ public class Tablero {
 		this.cuadricula = new int[dimension][dimension];
 		this.resultadosFilas = new int[dimension];
 		this.resultadosColumnas = new int[dimension];
+		this.maximoPosible = 9 * dimension;
+		this.minimoPosible = dimension;
 		generarResultadosFilas();
 		generarResultadosColumnas();
 	}
@@ -46,15 +48,28 @@ public class Tablero {
 	/** random [(dimension), (9*dimension)] */
 	private void generarResultadosFilas() {
 		Random random = new Random();
+		int resultado;
 		
 		for (int i = 0; i < resultadosFilas.length; i++) {
-			resultadosFilas[i] = this.minimoPosible + Math.abs(random.nextInt(this.maximoPosible-3));
+			do
+				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);
+			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
+			
+			resultadosFilas[i] = resultado;
 		}
 	}
 	
-	// TODO
 	private void generarResultadosColumnas() {
-		throw new RuntimeException("Método no implementado");
+		Random random = new Random();
+		int resultado;
+		
+		for (int i = 0; i < resultadosColumnas.length; i++) {
+			do
+				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);
+			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
+			
+			resultadosColumnas[i] = resultado;
+		}
 	}
 	
 	private void validarFila(int fila) {
