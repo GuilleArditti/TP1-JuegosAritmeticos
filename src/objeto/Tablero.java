@@ -11,7 +11,7 @@ public class Tablero {
 	private int maximoPosible;
 	private int minimoPosible;
 
-	public Tablero() {
+	public Tablero() {  //Tablero estandar de 4x4
 		this.cuadricula = new int[4][4];
 		this.resultadosFilas = new int[4];
 		this.resultadosColumnas = new int[4];
@@ -21,7 +21,7 @@ public class Tablero {
 		generarResultadosColumnas();
 	}
 	
-	public Tablero(int dimension) {
+	public Tablero(int dimension) { // Tablero cuadrado de dimension introducida por el user
 		validarDimension(dimension);
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
@@ -40,9 +40,35 @@ public class Tablero {
 		this.cuadricula[fila][col] = num;
 	}
 	
-	// TODO
 	public boolean sumasCorrectas() {
-		throw new RuntimeException("Método no implementado");
+		
+		return sumaFilasCorrectas() && sumaColumnasCorrectas();
+	}
+	
+	private boolean sumaFilasCorrectas() {
+		boolean sumaCorrecta=true;
+		int suma;
+		for(int i=0;i<cuadricula.length;i++) {
+			suma=0;
+			for(int j=0;j<cuadricula[0].length;j++) {
+				suma=suma+cuadricula[i][j];
+			}
+			sumaCorrecta= sumaCorrecta && suma==resultadosFilas[i];
+		}
+		return sumaCorrecta;
+	}
+	
+	private boolean sumaColumnasCorrectas() {
+		boolean sumaCorrecta=true;
+		int suma;
+		for(int i=0;i<cuadricula[0].length;i++) {
+			suma=0;
+			for(int j=0;j<cuadricula.length;j++) {
+				suma=suma+cuadricula[j][i];
+			}
+			sumaCorrecta= sumaCorrecta && suma==resultadosColumnas[i];
+		}
+		return sumaCorrecta;
 	}
 	
 	/** random [(dimension), (9*dimension)] */
@@ -52,10 +78,10 @@ public class Tablero {
 		
 		for (int i = 0; i < resultadosFilas.length; i++) {
 			do
-				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);
+				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);  //genera un random 
 			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
 			
-			resultadosFilas[i] = resultado;
+			resultadosFilas[i] = resultado; //llena cada celda con este numero 
 		}
 	}
 	

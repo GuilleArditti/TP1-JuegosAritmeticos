@@ -5,7 +5,8 @@ import java.util.Scanner;
 import objeto.Tablero;
 
 public class LogicaDelTablero {
-
+	
+	Tablero t;
 	Scanner scan = new Scanner(System.in);
 
 	private Tablero llenarTablero(Tablero t) {
