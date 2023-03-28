@@ -36,7 +36,7 @@ public class Tablero {
 	public void setCelda(int num, int fila, int col) {
 		validarFila(fila);
 		validarColumna(col);
-		
+		validarNumeroIntroducido(num);
 		this.cuadricula[fila][col] = num;
 	}
 	
@@ -117,6 +117,11 @@ public class Tablero {
 			throw new IllegalArgumentException("La dimension no puede ser menor que 4");
 		if (dimension > 10)
 			throw new IllegalArgumentException("La dimension no puede ser mayor que 10");
+	}
+	
+	private void validarNumeroIntroducido(int numero) {
+		if (numero < 1 || numero > 9)
+			throw new IllegalArgumentException("El número introducido debe estar entre 1 y 9");
 	}
 
 }
