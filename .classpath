@@ -18,5 +18,7 @@
 	<classpathentry kind="lib" path="C:/Users/guill/.p2/pool/plugins/org.eclipse.ui.workbench_3.126.0.v20220823-0718.jar" sourcepath="C:/Users/guill/.p2/pool/plugins/org.eclipse.ui.workbench_3.126.0.v20220823-0718.jar"/>
 	<classpathentry kind="lib" path="C:/Users/guill/.p2/pool/plugins/com.ibm.icu_67.1.0.jar" sourcepath="C:/Users/guill/.p2/pool/plugins/com.ibm.icu_67.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/guill/.p2/pool/plugins/org.eclipse.ui.forms_3.11.400.v20220817-1444.jar" sourcepath="C:/Users/guill/.p2/pool/plugins/org.eclipse.ui.forms_3.11.400.v20220817-1444.jar"/>
+	<classpathentry kind="lib" path="jgoodies-common-1.8.0.jar" sourcepath="jgoodies-common-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

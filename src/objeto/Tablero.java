@@ -15,7 +15,7 @@ public class Tablero {
 		this.cuadricula = new int[4][4];
 		this.resultadosFilas = new int[4];
 		this.resultadosColumnas = new int[4];
-		this.maximoPosible = 36;
+		this.maximoPosible = 36;													//Revisar maximos y minimos por la dificultad
 		this.minimoPosible = 4;
 		generarResultadosFilas();
 		generarResultadosColumnas();

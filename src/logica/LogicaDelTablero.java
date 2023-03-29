@@ -1,4 +1,4 @@
-package logica;
+package logica;	
 
 import java.util.Scanner;
 
@@ -65,7 +65,6 @@ public class LogicaDelTablero {
 			System.out.print(t.getResultadosColumnas()[i] +" ");
 		}
 	}
-
 
 	public boolean verificarTableroCompleto(Tablero t) {
 		return sumaFilasCorrectas(t) && sumaColumnasCorrectas(t);
