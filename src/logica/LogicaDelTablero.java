@@ -8,11 +8,14 @@ public class LogicaDelTablero {
 	
 	Scanner scan = new Scanner(System.in);
 
-	public void llenarTablero(Tablero t) {
+	public void llenarTablero(Tablero t) {		//Realiza lo mismo que setCelda
+		int numero;
 		for (int i = 0; i < t.getCuadricula().length; i++) {
 			for (int j = 0; j < t.getCuadricula()[0].length; j++) {
 				System.out.println("Ingrese un numero para la posición "+ i + ", " + j);
-				t.getCuadricula()[i][j] = scan.nextInt();
+				numero=scan.nextInt();
+				validarNumeroIntroducido(numero);
+				t.getCuadricula()[i][j] = numero;
 			}
 		}
 	}
@@ -66,6 +69,11 @@ public class LogicaDelTablero {
 
 	public boolean verificarTableroCompleto(Tablero t) {
 		return sumaFilasCorrectas(t) && sumaColumnasCorrectas(t);
+	}
+	
+	private void validarNumeroIntroducido(int numero) {
+		if (numero < 1 || numero > 9)
+			throw new IllegalArgumentException("El número introducido debe estar entre 1 y 9");
 	}
 
 }

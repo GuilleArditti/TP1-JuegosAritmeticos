@@ -11,7 +11,7 @@ public class Tablero {
 	private int maximoPosible;
 	private int minimoPosible;
 
-	public Tablero() {  //Tablero estandar de 4x4
+	public Tablero() {  																//Tablero estandar de 4x4
 		this.cuadricula = new int[4][4];
 		this.resultadosFilas = new int[4];
 		this.resultadosColumnas = new int[4];
@@ -21,7 +21,7 @@ public class Tablero {
 		generarResultadosColumnas();
 	}
 	
-	public Tablero(int dimension) { // Tablero cuadrado de dimension introducida por el user
+	public Tablero(int dimension) { 													// Tablero cuadrado de dimension introducida por el user
 		validarDimension(dimension);
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
@@ -32,18 +32,18 @@ public class Tablero {
 		generarResultadosFilas();
 		generarResultadosColumnas();
 	}
+		
 	
-
 	private void generarResultadosFilas() {
 		Random random = new Random();
 		int resultado;
 		
 		for (int i = 0; i < resultadosFilas.length; i++) {
 			do
-				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);  //genera un random 
+				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);  	//genera un random 
 			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
 			
-			resultadosFilas[i] = resultado; //llena cada celda con este numero 
+			resultadosFilas[i] = resultado; 											//llena cada celda con este numero 
 		}
 	}
 	
@@ -85,6 +85,4 @@ public class Tablero {
 		return resultadosColumnas;
 	}
 
-
-	
 }

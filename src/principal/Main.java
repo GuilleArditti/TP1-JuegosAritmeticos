@@ -47,7 +47,6 @@ public class Main {
 		//ldt.MostrarTablero(t1);
 		System.out.println(" ");
 		ldt.llenarTablero(t);
-		
 		ldt.MostrarTablero(t);
 		
 
