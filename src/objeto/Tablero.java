@@ -40,10 +40,10 @@ public class Tablero {
 		
 		for (int i = 0; i < resultadosFilas.length; i++) {
 			do
-				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);  	//genera un random 
+				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);  	
 			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
 			
-			resultadosFilas[i] = resultado; 											//llena cada celda con este numero 
+			resultadosFilas[i] = resultado; 											
 		}
 	}
 	
