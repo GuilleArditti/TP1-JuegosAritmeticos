@@ -40,7 +40,16 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(sumasCorrectas());
+		Tablero t= new Tablero();
+		//Tablero t1= new Tablero(6);
+		LogicaDelTablero ldt= new LogicaDelTablero();
+		ldt.MostrarTablero(t);
+		//ldt.MostrarTablero(t1);
+		System.out.println(" ");
+		ldt.llenarTablero(t);
+		
+		ldt.MostrarTablero(t);
+		
 
 	}
 

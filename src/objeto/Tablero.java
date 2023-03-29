@@ -33,45 +33,7 @@ public class Tablero {
 		generarResultadosColumnas();
 	}
 	
-	public void setCelda(int num, int fila, int col) {
-		validarFila(fila);
-		validarColumna(col);
-		
-		this.cuadricula[fila][col] = num;
-	}
-	
-	public boolean sumasCorrectas() {
-		
-		return sumaFilasCorrectas() && sumaColumnasCorrectas();
-	}
-	
-	private boolean sumaFilasCorrectas() {
-		boolean sumaCorrecta=true;
-		int suma;
-		for(int i=0;i<cuadricula.length;i++) {
-			suma=0;
-			for(int j=0;j<cuadricula[0].length;j++) {
-				suma=suma+cuadricula[i][j];
-			}
-			sumaCorrecta= sumaCorrecta && suma==resultadosFilas[i];
-		}
-		return sumaCorrecta;
-	}
-	
-	private boolean sumaColumnasCorrectas() {
-		boolean sumaCorrecta=true;
-		int suma;
-		for(int i=0;i<cuadricula[0].length;i++) {
-			suma=0;
-			for(int j=0;j<cuadricula.length;j++) {
-				suma=suma+cuadricula[j][i];
-			}
-			sumaCorrecta= sumaCorrecta && suma==resultadosColumnas[i];
-		}
-		return sumaCorrecta;
-	}
-	
-	/** random [(dimension), (9*dimension)] */
+
 	private void generarResultadosFilas() {
 		Random random = new Random();
 		int resultado;
@@ -96,27 +58,33 @@ public class Tablero {
 			
 			resultadosColumnas[i] = resultado;
 		}
-	}
-	
-	private void validarFila(int fila) {
-		if (fila < 0)
-			throw new IllegalArgumentException("La fila no puede ser menor que 0 (cero)");
-		if (fila >= cuadricula.length)
-			throw new IllegalArgumentException("La fila no puede ser mayor o igual que: " + this.dimension);
-	}
-	
-	private void validarColumna(int col) {
-		if (col < 0)
-			throw new IllegalArgumentException("La columna no puede ser menor que 0 (cero)");
-		if (col >= 0)
-			throw new IllegalArgumentException("La columna no puede ser mayor que: " + this.dimension);
-	}
+	}	
 	
 	private void validarDimension(int dimension) {
+
 		if (dimension < 4)
 			throw new IllegalArgumentException("La dimension no puede ser menor que 4");
 		if (dimension > 10)
 			throw new IllegalArgumentException("La dimension no puede ser mayor que 10");
 	}
 
+
+	public int[][] getCuadricula() {
+		return cuadricula;
+	}
+
+	public void setCuadricula(int[][] cuadricula) {
+		this.cuadricula = cuadricula;
+	}
+
+	public int[] getResultadosFilas() {
+		return resultadosFilas;
+	}
+
+	public int[] getResultadosColumnas() {
+		return resultadosColumnas;
+	}
+
+
+	
 }
