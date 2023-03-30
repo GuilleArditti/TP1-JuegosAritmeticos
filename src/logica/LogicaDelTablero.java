@@ -8,7 +8,7 @@ public class LogicaDelTablero {
 	
 	Scanner scan = new Scanner(System.in);
 
-	public void llenarTablero(Tablero t) {		//Realiza lo mismo que setCelda
+	public void llenarTablero(Tablero t) {		
 		int numero;
 		for (int i = 0; i < t.getCuadricula().length; i++) {
 			for (int j = 0; j < t.getCuadricula()[0].length; j++) {
