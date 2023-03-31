@@ -90,6 +90,7 @@ public class VentanaPrincipal implements ActionListener {
 		}
 		if(e.getSource()==BotonSalir) {
 			frame.dispose();
+			frame.setVisible(false);
 		}
 		
 	}

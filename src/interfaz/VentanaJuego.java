@@ -8,16 +8,19 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+
+import objeto.Tablero;
+
 import javax.swing.JButton;
 import java.awt.Color;
 
 public class VentanaJuego implements ActionListener{
 
+	Tablero t;
 	private JFrame frame;
 	JMenuBar barraMenu;
 	JMenu opciones;
@@ -27,6 +30,7 @@ public class VentanaJuego implements ActionListener{
 	JMenuItem acercaDe;
 	JMenuItem comoJugar;
 	JButton BotonIniciar;
+	JPanel panelGrilla;
 
 	/**
 	 * Launch the application.
@@ -65,10 +69,10 @@ public class VentanaJuego implements ActionListener{
 		frame.getContentPane().setLayout(null);
 		
 		//Representacion del tablero
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 47, 291, 167);
-		frame.getContentPane().add(panel);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		panelGrilla = new JPanel();
+		panelGrilla.setBounds(10, 47, 291, 167);
+		frame.getContentPane().add(panelGrilla);
+		panelGrilla.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		//Mejor tiempo - Record actual
 		JPanel panel_1 = new JPanel();
