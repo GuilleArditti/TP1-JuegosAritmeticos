@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.Cursor;
 import javax.swing.SwingConstants;
 
+import objeto.Tablero;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,19 +21,6 @@ public class VentanaPrincipal implements ActionListener {
 	private JFrame frame;
 	JButton BotonIniciarJuego;
 	JButton BotonSalir;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public VentanaPrincipal() {	
 		initialize();
@@ -82,16 +70,30 @@ public class VentanaPrincipal implements ActionListener {
 	}
 
 	//Acciones que realizan los botones
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==BotonIniciarJuego) {
-			VentanaJuego ventana= new VentanaJuego();
-			
+			frame.setVisible(false);
+			Juego juego= new Juego();
 		}
 		if(e.getSource()==BotonSalir) {
 			frame.dispose();
-			frame.setVisible(false);
-		}
-		
+		}		
 	}
+	
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VentanaPrincipal window = new VentanaPrincipal();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 }

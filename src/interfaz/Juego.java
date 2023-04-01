@@ -19,6 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import logica.LogicaDelTablero;
+import objeto.Tablero;
+import javax.swing.BoxLayout;
 
 public class Juego implements ActionListener {
 
@@ -30,26 +33,12 @@ public class Juego implements ActionListener {
 	private JMenuItem salir;
 	private JMenuItem acercaDe;
 	private JMenuItem comoJugar;
-	private JButton botonIniciar;
+	private JButton botonComprobar;
 	private JPanel panel;
 	private JTextField[][] textFields;
-	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Juego window = new Juego();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private LogicaDelTablero utilidades= new LogicaDelTablero();
+	private Tablero tablero=utilidades.generarTablero4x4();
+	
 
 	/**
 	 * Create the application.
@@ -79,11 +68,12 @@ public class Juego implements ActionListener {
 		crearResultados();
 		
 		//Boton Iniciar!
-		crearBotonInicio();
+		crearBotonComprobar();
 
 	}
 
 	// Funciones
+	
 	private void crearVentana() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 480, 350);
@@ -103,6 +93,8 @@ public class Juego implements ActionListener {
 
 		barraMenu.add(opciones);
 		barraMenu.add(ayuda);
+		
+		
 
 		// Item Opciones
 		reiniciar = new JMenuItem("Reiniciar");
@@ -126,25 +118,26 @@ public class Juego implements ActionListener {
 	}
 
 	private void crearTablero() {
+		
 		panel = new JPanel();
-		panel.setPreferredSize(new Dimension(4, 4));
-		panel.setMinimumSize(new Dimension(4, 4));
+		panel.setPreferredSize(new Dimension(tablero.getDimension(),tablero.getDimension()));
+		panel.setMinimumSize(new Dimension(tablero.getDimension(),tablero.getDimension()));
 		panel.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		panel.setBackground(Color.YELLOW);
+		panel.setBackground(Color.BLACK);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(20, 50, 259, 188);
 		frame.getContentPane().add(panel);
-		panel.setLayout(new GridLayout(4, 4, 1, 1));
+		panel.setLayout(new GridLayout(tablero.getDimension(),tablero.getDimension(), 1, 1));
 
-		textFields = new JTextField[4][4];
+		textFields = new JTextField[tablero.getDimension()][tablero.getDimension()];
 		for (int i = 0; i < textFields.length; i++) {
 			for (int j = 0; j < textFields[0].length; j++) {
 				textFields[i][j] = new JTextField();
 				textFields[i][j].setFont(new Font("Tahoma", Font.PLAIN, 12));
 				textFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(textFields[i][j]);
-				textFields[i][j].setColumns(4);
+				textFields[i][j].setColumns(tablero.getDimension());
 			}
 		}
 	}
@@ -152,42 +145,78 @@ public class Juego implements ActionListener {
 	private void mostrarTiempo() {
 		// Mejor tiempo - Record actual
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(20, 11, 130, 25);
+		panel_1.setBounds(20, 11, 104, 25);
+		panel_1.setBackground(Color.BLACK);
 		frame.getContentPane().add(panel_1);
 
 		// Cronometro partida
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(182, 11, 130, 25);
+		panel_2.setBounds(175, 11, 104, 25);
+		panel_2.setBackground(Color.BLACK);
 		frame.getContentPane().add(panel_2);
 	}
 	
 	private void crearResultados() {
 		// Representacion numeros filas
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(287, 50, 25, 188);
+		panel_3.setBackground(Color.BLACK);
+		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_3.setBounds(287, 50, 50, 188);
+		panel_3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
 		frame.getContentPane().add(panel_3);
-		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-
+		
+		for(int i=0;i<tablero.getResultadosFilas().length;i++) {
+			JButton valor= new JButton(String.valueOf(tablero.getResultadosFilas()[i]));
+			valor.setMinimumSize(new Dimension(10,10));
+			valor.setMaximumSize(new Dimension(65,30));
+			valor.setPreferredSize(new Dimension(45,70));
+			valor.setEnabled(false);
+			panel_3.add(valor);
+		}
+		
+		
 		// Representacion numeros columnas
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(20, 246, 259, 25);
+		panel_4.setPreferredSize(new Dimension(tablero.getResultadosFilas().length, 1));
+		panel_4.setMinimumSize(new Dimension(tablero.getResultadosFilas().length, 1));
+		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		panel_4.setBackground(Color.BLACK);
+		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_4.setBounds(20, 246, 259, 32);
 		frame.getContentPane().add(panel_4);
-		panel_4.setLayout(new GridLayout(1, 0, 0, 0));
-		frame.setVisible(true);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
+		
+		for(int i=0;i<tablero.getResultadosColumnas().length;i++) {
+			JButton valor= new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
+			valor.setMinimumSize(new Dimension(10,10));
+			valor.setMaximumSize(new Dimension(65,30));
+			valor.setPreferredSize(new Dimension(45,70));
+			valor.setEnabled(false);
+			panel_4.add(valor);
+		}
+		
 	}
 	
 
-	private void crearBotonInicio() {
-		botonIniciar = new JButton("Iniciar!");
-		botonIniciar.setBounds(341, 246, 104, 25);
-		frame.getContentPane().add(botonIniciar);
+	private void crearBotonComprobar() {
+		botonComprobar = new JButton("Comprobar");
+		botonComprobar.setBounds(341, 246, 104, 25);
+		frame.getContentPane().add(botonComprobar);
+		botonComprobar.addActionListener(this);
 	}
 
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == botonIniciar) {
-
+		if (e.getSource() == botonComprobar) {
+			for(int i=0;i<textFields.length;i++) {
+				for(int j=0;j<textFields[0].length;j++) {
+					tablero.getCuadricula()[i][j]=Integer.parseInt(textFields[i][j].getText());
+				}
+			}
+	
+			utilidades.MostrarTablero(tablero);
 		}
 		if (e.getSource() == reiniciar) {
 
@@ -202,5 +231,20 @@ public class Juego implements ActionListener {
 
 		}
 	}
-
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Juego window = new Juego();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

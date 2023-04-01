@@ -11,12 +11,13 @@ public class Tablero {
 	private int maximoPosible;
 	private int minimoPosible;
 
-	public Tablero() {  																//Tablero estandar de 4x4
-		this.cuadricula = new int[4][4];
-		this.resultadosFilas = new int[4];
-		this.resultadosColumnas = new int[4];
+	public Tablero() { //Tablero estandar de 4x4
+		this.dimension=4;
+		this.cuadricula = new int[dimension][dimension];
+		this.resultadosFilas = new int[dimension];
+		this.resultadosColumnas = new int[dimension];
 		this.maximoPosible = 36;													//Revisar maximos y minimos por la dificultad
-		this.minimoPosible = 4;
+		this.minimoPosible = dimension;
 		generarResultadosFilas();
 		generarResultadosColumnas();
 	}
@@ -83,6 +84,14 @@ public class Tablero {
 
 	public int[] getResultadosColumnas() {
 		return resultadosColumnas;
+	}
+
+	public int getDimension() {
+		return dimension;
+	}
+
+	public void setDimension(int dimension) {
+		this.dimension = dimension;
 	}
 
 }

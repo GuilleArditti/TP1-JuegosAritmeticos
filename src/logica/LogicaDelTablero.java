@@ -7,8 +7,16 @@ import objeto.Tablero;
 public class LogicaDelTablero {
 	
 	Scanner scan = new Scanner(System.in);
+	
+	public Tablero generarTablero4x4() {
+		return new Tablero();
+	}
+	
+	public Tablero generarTableroConDimension(int dimension) {
+		return new Tablero(dimension);
+	}
 
-	public void llenarTablero(Tablero t) {		
+	public void llenarTablero(Tablero t) {		//Metodo de Prueba para consola
 		int numero;
 		for (int i = 0; i < t.getCuadricula().length; i++) {
 			for (int j = 0; j < t.getCuadricula()[0].length; j++) {
@@ -18,6 +26,15 @@ public class LogicaDelTablero {
 				t.getCuadricula()[i][j] = numero;
 			}
 		}
+	}
+	
+	public Tablero llenarTableroConNumeros(Tablero t,int num) {      //A modificar para la clase Juego, en la carga de los TextFields
+		for (int i = 0; i < t.getCuadricula().length; i++) {
+			for (int j = 0; j < t.getCuadricula()[0].length; j++) {
+				t.getCuadricula()[i][j]=num;
+			}
+		}
+		return t;
 	}
 	
 	private boolean sumaFilasCorrectas(Tablero t) {
@@ -46,7 +63,7 @@ public class LogicaDelTablero {
 		return sumaCorrecta;
 	}
 
-	public void MostrarTablero(Tablero t) {
+	public void MostrarTablero(Tablero t) {					//Metodo de Prueba para consola
 		for (int i = 0; i < t.getCuadricula().length; i++) {
 			System.out.print("[");
 			for (int j = 0; j < t.getCuadricula()[0].length; j++) {
