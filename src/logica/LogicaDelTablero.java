@@ -9,7 +9,6 @@ public class LogicaDelTablero {
 	Scanner scan = new Scanner(System.in);
 	
 	public Tablero generarTablero(int dimension) {
-
 		return new Tablero(dimension);
 	}
 	

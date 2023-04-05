@@ -94,8 +94,7 @@ public class VentanaPrincipal implements ActionListener {
 		if(e.getSource()==BotonSalir) {
 			frame.dispose();
 		}		
-	}
-	
+	}	
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

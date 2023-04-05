@@ -38,19 +38,18 @@ public class Juego implements ActionListener {
 	private JPanel panel;
 	private JTextField[][] textFields;
 	private LogicaDelTablero utilidades= new LogicaDelTablero();
-
-	
-	
+	private Tablero tablero;
 
 //	public Juego() {
 //		initialize();
 //	}
 
-	public Juego(Tablero t) {
-		initialize(t);
+	public Juego(Tablero tablero) {
+		this.tablero=tablero;
+		initialize();
 	}
 
-	private void initialize(Tablero t) {
+	private void initialize() {
 
 		// Ventana
 		crearVentana();
@@ -62,14 +61,21 @@ public class Juego implements ActionListener {
 		mostrarTiempo();
 
 		// Tablero
-		crearTablero(t);
+		crearTablero(tablero);
 
 		// Resultados
-		crearResultados(t);
+		crearResultados(tablero);		
 		
 		//Boton Iniciar!
 		crearBotonComprobar();
+		
+		//Chequear sumas en tiempo de ejecución
+		chequearSumasActuales();
 
+	}
+
+	private void chequearSumasActuales() {
+		
 	}
 
 	// Funciones
@@ -129,11 +135,14 @@ public class Juego implements ActionListener {
 		panel.setBounds(20, 50, 259, 188);
 		frame.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(tablero.getDimension(),tablero.getDimension(), 1, 1));
+		
+		
 
 		textFields = new JTextField[tablero.getDimension()][tablero.getDimension()];
 		for (int i = 0; i < textFields.length; i++) {
 			for (int j = 0; j < textFields[0].length; j++) {
 				textFields[i][j] = new JTextField();
+				System.out.println(textFields[i][j].getText());
 				textFields[i][j].setFont(new Font("Tahoma", Font.PLAIN, 12));
 				textFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(textFields[i][j]);
@@ -183,9 +192,10 @@ public class Juego implements ActionListener {
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_4.setBackground(Color.BLACK);
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_4.setBounds(20, 246, 260, 25);
-		frame.getContentPane().add(panel_4);
+		panel_4.setBounds(20, 246, 260, 20);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
+		frame.getContentPane().add(panel_4);
+		
 		
 		for(int i=0;i<tablero.getResultadosColumnas().length;i++) {
 			JButton valor= new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
@@ -206,11 +216,10 @@ public class Juego implements ActionListener {
 		botonComprobar.addActionListener(this);
 	}
 	
-	private Tablero volcarResultadosDeCampos(JTextField[][] campos) {
-		Tablero tablero= new Tablero();
-		for(int i=0;i<campos.length;i++) {
-			for(int j=0;j<campos[0].length;j++) {
-				tablero.getCuadricula()[i][j]=Integer.parseInt(campos[i][j].getText());
+	private Tablero volcarResultadosDeCampos(Tablero tablero) {
+		for(int i=0;i<textFields.length;i++) {
+			for(int j=0;j<textFields[0].length;j++) {
+				tablero.getCuadricula()[i][j]=Integer.parseInt(textFields[i][j].getText());
 			}
 		}
 		return tablero;
@@ -220,7 +229,7 @@ public class Juego implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() == botonComprobar) {
-				if(utilidades.verificarTableroCompleto(volcarResultadosDeCampos(textFields))) {
+				if(utilidades.verificarTableroCompleto(volcarResultadosDeCampos(tablero))) {
 					JOptionPane.showMessageDialog(null,"Felicidades, Ganaste!", "Felicitaciones!", JOptionPane.PLAIN_MESSAGE);
 					botonComprobar.setEnabled(false);
 				}
