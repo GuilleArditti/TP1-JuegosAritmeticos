@@ -5,9 +5,12 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Cursor;
 import javax.swing.SwingConstants;
 
+import logica.LogicaDelTablero;
 import objeto.Tablero;
 
 import javax.swing.ImageIcon;
@@ -21,6 +24,7 @@ public class VentanaPrincipal implements ActionListener {
 	private JFrame frame;
 	JButton BotonIniciarJuego;
 	JButton BotonSalir;
+	LogicaDelTablero logica= new LogicaDelTablero();
 
 	public VentanaPrincipal() {	
 		initialize();
@@ -68,14 +72,24 @@ public class VentanaPrincipal implements ActionListener {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	private int mostrarOpciones() {
+		String[] opciones = { "4", "6", "8"};
+		String input = (String)JOptionPane.showInputDialog(null, "Elija la cantidad de filas y columnas:",
+		        "Una eleccion importante...", JOptionPane.QUESTION_MESSAGE, null,opciones,opciones[0]);
+		int eleccion= Integer.parseInt(input);
+		return eleccion;
+	}
 
 	//Acciones que realizan los botones
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==BotonIniciarJuego) {
-			frame.setVisible(false);
-			Juego juego= new Juego();
+			int tamañoDelTablero=mostrarOpciones();
+			Tablero tablero=logica.generarTablero(tamañoDelTablero);
+			frame.dispose();
+			Juego juego= new Juego(tablero);
 		}
 		if(e.getSource()==BotonSalir) {
 			frame.dispose();

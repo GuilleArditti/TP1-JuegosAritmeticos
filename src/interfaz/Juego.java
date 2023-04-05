@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -37,20 +38,19 @@ public class Juego implements ActionListener {
 	private JPanel panel;
 	private JTextField[][] textFields;
 	private LogicaDelTablero utilidades= new LogicaDelTablero();
-	private Tablero tablero=utilidades.generarTablero4x4();
+
+	
 	
 
-	/**
-	 * Create the application.
-	 */
-	public Juego() {
-		initialize();
+//	public Juego() {
+//		initialize();
+//	}
+
+	public Juego(Tablero t) {
+		initialize(t);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	private void initialize(Tablero t) {
 
 		// Ventana
 		crearVentana();
@@ -62,10 +62,10 @@ public class Juego implements ActionListener {
 		mostrarTiempo();
 
 		// Tablero
-		crearTablero();
+		crearTablero(t);
 
 		// Resultados
-		crearResultados();
+		crearResultados(t);
 		
 		//Boton Iniciar!
 		crearBotonComprobar();
@@ -76,7 +76,7 @@ public class Juego implements ActionListener {
 	
 	private void crearVentana() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 480, 350);
+		frame.setBounds(100, 100, 600, 600);
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Tablero");
 		frame.getContentPane().setBackground(new Color(128, 0, 0));
@@ -117,7 +117,7 @@ public class Juego implements ActionListener {
 		ayuda.add(acercaDe);
 	}
 
-	private void crearTablero() {
+	private void crearTablero(Tablero tablero) {
 		
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(tablero.getDimension(),tablero.getDimension()));
@@ -156,7 +156,7 @@ public class Juego implements ActionListener {
 		frame.getContentPane().add(panel_2);
 	}
 	
-	private void crearResultados() {
+	private void crearResultados(Tablero tablero) {
 		// Representacion numeros filas
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.BLACK);
@@ -183,15 +183,15 @@ public class Juego implements ActionListener {
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_4.setBackground(Color.BLACK);
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_4.setBounds(20, 246, 259, 32);
+		panel_4.setBounds(20, 246, 260, 25);
 		frame.getContentPane().add(panel_4);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		
 		for(int i=0;i<tablero.getResultadosColumnas().length;i++) {
 			JButton valor= new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
 			valor.setMinimumSize(new Dimension(10,10));
-			valor.setMaximumSize(new Dimension(65,30));
-			valor.setPreferredSize(new Dimension(45,70));
+			valor.setMaximumSize(new Dimension(70,70));
+			valor.setPreferredSize(new Dimension(65,90));
 			valor.setEnabled(false);
 			panel_4.add(valor);
 		}
@@ -205,27 +205,42 @@ public class Juego implements ActionListener {
 		frame.getContentPane().add(botonComprobar);
 		botonComprobar.addActionListener(this);
 	}
-
+	
+	private Tablero volcarResultadosDeCampos(JTextField[][] campos) {
+		Tablero tablero= new Tablero();
+		for(int i=0;i<campos.length;i++) {
+			for(int j=0;j<campos[0].length;j++) {
+				tablero.getCuadricula()[i][j]=Integer.parseInt(campos[i][j].getText());
+			}
+		}
+		return tablero;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == botonComprobar) {
-			for(int i=0;i<textFields.length;i++) {
-				for(int j=0;j<textFields[0].length;j++) {
-					tablero.getCuadricula()[i][j]=Integer.parseInt(textFields[i][j].getText());
+		try {
+			if (e.getSource() == botonComprobar) {
+				if(utilidades.verificarTableroCompleto(volcarResultadosDeCampos(textFields))) {
+					JOptionPane.showMessageDialog(null,"Felicidades, Ganaste!", "Felicitaciones!", JOptionPane.PLAIN_MESSAGE);
+					botonComprobar.setEnabled(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Las sumas son incorrectas, perdiste!", "Segui participando", JOptionPane.ERROR_MESSAGE);
+					botonComprobar.setEnabled(false);
+					
 				}
 			}
-	
-			utilidades.MostrarTablero(tablero);
+		} catch (NumberFormatException IllegalArgumentException) {
+			JOptionPane.showMessageDialog(null, "El tablero aún no está completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
+		
 		if (e.getSource() == reiniciar) {
-
 		}
 		if (e.getSource() == salir) {
 			frame.dispose();
 		}
 		if (e.getSource() == comoJugar) {
-
+			
 		}
 		if (e.getSource() == acercaDe) {
 
@@ -235,16 +250,18 @@ public class Juego implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Juego window = new Juego();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//
+//			public void run() {
+//				try {
+//					Juego window = new Juego();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 }

@@ -16,13 +16,13 @@ public class Tablero {
 		this.cuadricula = new int[dimension][dimension];
 		this.resultadosFilas = new int[dimension];
 		this.resultadosColumnas = new int[dimension];
-		this.maximoPosible = 36;													//Revisar maximos y minimos por la dificultad
+		this.maximoPosible = 4;													//Revisar maximos y minimos por la dificultad
 		this.minimoPosible = dimension;
 		generarResultadosFilas();
 		generarResultadosColumnas();
 	}
 	
-	public Tablero(int dimension) { 													// Tablero cuadrado de dimension introducida por el user
+	public Tablero(int dimension) { 											// Tablero cuadrado de dimension introducida por el user
 		validarDimension(dimension);
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
