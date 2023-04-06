@@ -26,6 +26,7 @@ public class VentanaPrincipal implements ActionListener {
 	JButton BotonSalir;
 	LogicaDelTablero logica= new LogicaDelTablero();
 
+	//Ventana principal menu
 	public VentanaPrincipal() {	
 		initialize();
 	}
