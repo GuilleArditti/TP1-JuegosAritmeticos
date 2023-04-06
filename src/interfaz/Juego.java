@@ -40,10 +40,6 @@ public class Juego implements ActionListener {
 	private LogicaDelTablero utilidades= new LogicaDelTablero();
 	private Tablero tablero;
 
-//	public Juego() {
-//		initialize();
-//	}
-
 	public Juego(Tablero tablero) {
 		this.tablero=tablero;
 		initialize();
@@ -69,13 +65,13 @@ public class Juego implements ActionListener {
 		//Boton Iniciar!
 		crearBotonComprobar();
 		
-		//Chequear sumas en tiempo de ejecución
+		//Chequear sumas en tiempo de ejecucion
 		chequearSumasActuales();
 
 	}
 
 	private void chequearSumasActuales() {
-		
+		// TODO - pintar filas de verde
 	}
 
 	// Funciones
@@ -240,7 +236,7 @@ public class Juego implements ActionListener {
 				}
 			}
 		} catch (NumberFormatException IllegalArgumentException) {
-			JOptionPane.showMessageDialog(null, "El tablero aún no está completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "El tablero aï¿½n no estï¿½ completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
 		
 		if (e.getSource() == reiniciar) {
@@ -256,21 +252,4 @@ public class Juego implements ActionListener {
 		}
 	}
 	
-	/**
-	 * Launch the application.
-	 */
-	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//
-//			public void run() {
-//				try {
-//					Juego window = new Juego();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 }
