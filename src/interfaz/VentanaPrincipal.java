@@ -36,7 +36,7 @@ public class VentanaPrincipal implements ActionListener {
 		//Ventana Principal
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.BLUE);
-		frame.setTitle("Bienvenido a Juegos Aritméticos");
+		frame.setTitle("Bienvenido a Juegos Aritmï¿½ticos");
 		frame.getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -86,8 +86,8 @@ public class VentanaPrincipal implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==BotonIniciarJuego) {
-			int tamañoDelTablero=mostrarOpciones();
-			Tablero tablero=logica.generarTablero(tamañoDelTablero);
+			int tamanioDelTablero=mostrarOpciones();
+			Tablero tablero=logica.generarTablero(tamanioDelTablero);
 			frame.dispose();
 			Juego juego= new Juego(tablero);
 		}
