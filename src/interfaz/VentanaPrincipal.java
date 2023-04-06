@@ -31,7 +31,7 @@ public class VentanaPrincipal implements ActionListener {
 		initialize();
 	}
 
-	public void initialize() {
+	private void initialize() {
 		
 		
 		//Ventana Principal
