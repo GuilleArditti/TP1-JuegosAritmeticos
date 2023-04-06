@@ -1,0 +1,11 @@
+# codigo maquina
+/bin/
+
+# eclipse config
+/.settings/
+
+# no se que hace
+/.classpath
+
+# tampoco se que hace
+/.project
