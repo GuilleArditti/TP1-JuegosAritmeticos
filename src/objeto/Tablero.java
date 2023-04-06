@@ -11,17 +11,6 @@ public class Tablero {
 	private int[][] cuadricula;
 	private int maximoPosible;
 	private int minimoPosible;
-
-	public Tablero() { 
-		this.dimension=4;
-		this.cuadricula = new int[dimension][dimension];
-		this.resultadosFilas = new int[dimension];
-		this.resultadosColumnas = new int[dimension];
-		this.maximoPosible = 4;													//Revisar maximos y minimos por la dificultad
-		this.minimoPosible = dimension;
-		generarResultadosFilas();
-		generarResultadosColumnas();
-	}
 	
 	public Tablero(int dimension) {
 		validarDimension(dimension);
@@ -31,33 +20,6 @@ public class Tablero {
 		this.minimoPosible = dimension;
 		generarResultadosFilasYColumnas();
 	}
-		
-	
-	private void generarResultadosFilas() {
-		Random random = new Random();
-		int resultado;
-		
-		for (int i = 0; i < resultadosFilas.length; i++) {
-			do
-				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);  	
-			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
-			
-			resultadosFilas[i] = resultado; 											
-		}
-	}
-	
-	private void generarResultadosColumnas() {
-		Random random = new Random();
-		int resultado;
-		
-		for (int i = 0; i < resultadosColumnas.length; i++) {
-			do
-				resultado = this.minimoPosible + random.nextInt(this.maximoPosible);
-			while (resultado < this.minimoPosible || resultado > this.maximoPosible);
-			
-			resultadosColumnas[i] = resultado;
-		}
-	}	
 	
 	private void validarDimension(int dimension) {
 
