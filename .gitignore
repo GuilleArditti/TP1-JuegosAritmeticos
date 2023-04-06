@@ -9,3 +9,7 @@
 
 # tampoco se que hace
 /.project
+.classpath
+.project
+*.prefs
+*.class
