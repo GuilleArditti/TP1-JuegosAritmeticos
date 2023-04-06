@@ -22,9 +22,9 @@ import java.awt.Color;
 public class VentanaPrincipal implements ActionListener {
 
 	private JFrame frame;
-	JButton BotonIniciarJuego;
-	JButton BotonSalir;
-	LogicaDelTablero logica= new LogicaDelTablero();
+	private JButton BotonIniciarJuego;
+	private JButton BotonSalir;
+	private LogicaDelTablero logica= new LogicaDelTablero();
 
 	//Ventana principal menu
 	public VentanaPrincipal() {	
