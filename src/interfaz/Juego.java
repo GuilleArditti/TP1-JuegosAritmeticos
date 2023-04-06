@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -187,8 +188,8 @@ public class Juego implements ActionListener {
 		
 		// Representacion numeros columnas
 		JPanel panel_4 = new JPanel();
-		panel_4.setPreferredSize(new Dimension(tablero.getResultadosFilas().length, 1));
-		panel_4.setMinimumSize(new Dimension(tablero.getResultadosFilas().length, 1));
+		panel_4.setPreferredSize(new Dimension(tablero.getResultadosColumnas().length, 1));
+		panel_4.setMinimumSize(new Dimension(tablero.getResultadosColumnas().length, 1));
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_4.setBackground(Color.BLACK);
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -240,19 +241,27 @@ public class Juego implements ActionListener {
 				}
 			}
 		} catch (NumberFormatException IllegalArgumentException) {
-			JOptionPane.showMessageDialog(null, "El tablero aún no está completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null,"El tablero aún no está completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
 		
 		if (e.getSource() == reiniciar) {
+			frame.dispose();
+			VentanaPrincipal nuevo= new VentanaPrincipal();
 		}
 		if (e.getSource() == salir) {
 			frame.dispose();
 		}
 		if (e.getSource() == comoJugar) {
-			
+			JFrame ventanaayuda = new JFrame();
+			JLabel panel = new JLabel();
+			//panel.setBackground(comojugar.png);
+			ventanaayuda.add(panel);
+			ventanaayuda.setEnabled(true);
 		}
 		if (e.getSource() == acercaDe) {
-
+			JOptionPane.showMessageDialog(null,"	Juegos Aritméticos ® \n" 
+											+ "		Devs: Guillermo Arditti, Marcelo Palacios, Nancy Nores. \n"
+											, "Acerca de", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 	
