@@ -1,0 +1,20 @@
+# codigo maquina
+/bin/
+
+# eclipse config
+/.settings/
+
+# no se que hace
+/.classpath
+
+# tampoco se que hace
+/.project
+.classpath
+.project
+*.prefs
+*.class
+.classpath
+.project
+.settings/org.eclipse.core.resources.prefs
+.settings/org.eclipse.jdt.core.prefs
+*.class

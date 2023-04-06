@@ -22,31 +22,30 @@ import java.awt.Color;
 public class VentanaPrincipal implements ActionListener {
 
 	private JFrame frame;
-	JButton BotonIniciarJuego;
-	JButton BotonSalir;
-	LogicaDelTablero logica= new LogicaDelTablero();
+	private JButton BotonIniciarJuego;
+	private JButton BotonSalir;
+	private LogicaDelTablero logica = new LogicaDelTablero();
 
-	public VentanaPrincipal() {	
+	// Ventana principal menu
+	public VentanaPrincipal() {
 		initialize();
 	}
 
-	public void initialize() {
-		
-		
-		//Ventana Principal
+	private void initialize() {
+
+		// Ventana Principal
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.BLUE);
-		frame.setTitle("Bienvenido a Juegos Aritméticos");
+		frame.setTitle("Bienvenido a Juegos Aritmï¿½ticos");
 		frame.getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		
-		
-		//Icono ventana
-		ImageIcon image= new ImageIcon("descarga.png");
+
+		// Icono ventana
+		ImageIcon image = new ImageIcon("descarga.png");
 		frame.setIconImage(image.getImage());
-		
-		//Titulo
+
+		// Titulo
 		JLabel lblNewLabel = new JLabel("Juegos Aritmeticos");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBackground(Color.WHITE);
@@ -55,15 +54,15 @@ public class VentanaPrincipal implements ActionListener {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(75, 24, 287, 48);
 		frame.getContentPane().add(lblNewLabel);
-		
-		//Boton Jugar!
+
+		// Boton Jugar!
 		BotonIniciarJuego = new JButton("Jugar!");
 		BotonIniciarJuego.setBorder(null);
 		BotonIniciarJuego.setBounds(170, 150, 89, 23);
 		BotonIniciarJuego.addActionListener(this);
 		frame.getContentPane().add(BotonIniciarJuego);
-		
-		//Boton Salir
+
+		// Boton Salir
 		BotonSalir = new JButton("Salir");
 		BotonSalir.addActionListener(this);
 		BotonSalir.setBorder(null);
@@ -72,30 +71,30 @@ public class VentanaPrincipal implements ActionListener {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	private int mostrarOpciones() {
-		String[] opciones = { "4", "6", "8"};
-		String input = (String)JOptionPane.showInputDialog(null, "Elija la cantidad de filas y columnas:",
-		        "Una eleccion importante...", JOptionPane.QUESTION_MESSAGE, null,opciones,opciones[0]);
-		int eleccion= Integer.parseInt(input);
+		String[] opciones = { "4", "6", "8" };
+		String input = (String) JOptionPane.showInputDialog(null, "Elija la cantidad de filas y columnas:",
+				"Una eleccion importante...", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+		int eleccion = Integer.parseInt(input);
 		return eleccion;
 	}
 
-	//Acciones que realizan los botones
-	
+	// Acciones que realizan los botones
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==BotonIniciarJuego) {
-			int tamañoDelTablero=mostrarOpciones();
-			Tablero tablero=logica.generarTablero(tamañoDelTablero);
+		if (e.getSource() == BotonIniciarJuego) {
+			int tamanioDelTablero = mostrarOpciones();
+			Tablero tablero = logica.generarTablero(tamanioDelTablero);
 			frame.dispose();
-			Juego juego= new Juego(tablero);
+			Juego juego = new Juego(tablero);
 		}
-		if(e.getSource()==BotonSalir) {
+		if (e.getSource() == BotonSalir) {
 			frame.dispose();
-		}		
-	}	
-	
+		}
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

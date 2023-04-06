@@ -38,15 +38,11 @@ public class Juego implements ActionListener {
 	private JButton botonComprobar;
 	private JPanel panel;
 	private JTextField[][] textFields;
-	private LogicaDelTablero utilidades= new LogicaDelTablero();
+	private LogicaDelTablero utilidades = new LogicaDelTablero();
 	private Tablero tablero;
 
-//	public Juego() {
-//		initialize();
-//	}
-
 	public Juego(Tablero tablero) {
-		this.tablero=tablero;
+		this.tablero = tablero;
 		initialize();
 	}
 
@@ -65,22 +61,22 @@ public class Juego implements ActionListener {
 		crearTablero(tablero);
 
 		// Resultados
-		crearResultados(tablero);		
-		
-		//Boton Iniciar!
+		crearResultados(tablero);
+
+		// Boton Iniciar!
 		crearBotonComprobar();
-		
-		//Chequear sumas en tiempo de ejecución
+
+		// Chequear sumas en tiempo de ejecucion
 		chequearSumasActuales();
 
 	}
 
 	private void chequearSumasActuales() {
-		
+		// TODO - pintar filas de verde
 	}
 
 	// Funciones
-	
+
 	private void crearVentana() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 600, 600);
@@ -100,8 +96,6 @@ public class Juego implements ActionListener {
 
 		barraMenu.add(opciones);
 		barraMenu.add(ayuda);
-		
-		
 
 		// Item Opciones
 		reiniciar = new JMenuItem("Reiniciar");
@@ -125,19 +119,17 @@ public class Juego implements ActionListener {
 	}
 
 	private void crearTablero(Tablero tablero) {
-		
+
 		panel = new JPanel();
-		panel.setPreferredSize(new Dimension(tablero.getDimension(),tablero.getDimension()));
-		panel.setMinimumSize(new Dimension(tablero.getDimension(),tablero.getDimension()));
+		panel.setPreferredSize(new Dimension(tablero.getDimension(), tablero.getDimension()));
+		panel.setMinimumSize(new Dimension(tablero.getDimension(), tablero.getDimension()));
 		panel.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel.setBackground(Color.BLACK);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBounds(20, 50, 259, 188);
 		frame.getContentPane().add(panel);
-		panel.setLayout(new GridLayout(tablero.getDimension(),tablero.getDimension(), 1, 1));
-		
-		
+		panel.setLayout(new GridLayout(tablero.getDimension(), tablero.getDimension(), 1, 1));
 
 		textFields = new JTextField[tablero.getDimension()][tablero.getDimension()];
 		for (int i = 0; i < textFields.length; i++) {
@@ -165,7 +157,7 @@ public class Juego implements ActionListener {
 		panel_2.setBackground(Color.BLACK);
 		frame.getContentPane().add(panel_2);
 	}
-	
+
 	private void crearResultados(Tablero tablero) {
 		// Representacion numeros filas
 		JPanel panel_3 = new JPanel();
@@ -175,17 +167,16 @@ public class Juego implements ActionListener {
 		panel_3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
 		frame.getContentPane().add(panel_3);
-		
-		for(int i=0;i<tablero.getResultadosFilas().length;i++) {
-			JButton valor= new JButton(String.valueOf(tablero.getResultadosFilas()[i]));
-			valor.setMinimumSize(new Dimension(10,10));
-			valor.setMaximumSize(new Dimension(65,30));
-			valor.setPreferredSize(new Dimension(45,70));
+
+		for (int i = 0; i < tablero.getResultadosFilas().length; i++) {
+			JButton valor = new JButton(String.valueOf(tablero.getResultadosFilas()[i]));
+			valor.setMinimumSize(new Dimension(10, 10));
+			valor.setMaximumSize(new Dimension(65, 30));
+			valor.setPreferredSize(new Dimension(45, 70));
 			valor.setEnabled(false);
 			panel_3.add(valor);
 		}
-		
-		
+
 		// Representacion numeros columnas
 		JPanel panel_4 = new JPanel();
 		panel_4.setPreferredSize(new Dimension(tablero.getResultadosColumnas().length, 1));
@@ -196,19 +187,17 @@ public class Juego implements ActionListener {
 		panel_4.setBounds(20, 246, 260, 20);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		frame.getContentPane().add(panel_4);
-		
-		
-		for(int i=0;i<tablero.getResultadosColumnas().length;i++) {
-			JButton valor= new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
-			valor.setMinimumSize(new Dimension(10,10));
-			valor.setMaximumSize(new Dimension(70,70));
-			valor.setPreferredSize(new Dimension(65,90));
+
+		for (int i = 0; i < tablero.getResultadosColumnas().length; i++) {
+			JButton valor = new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
+			valor.setMinimumSize(new Dimension(10, 10));
+			valor.setMaximumSize(new Dimension(70, 70));
+			valor.setPreferredSize(new Dimension(65, 90));
 			valor.setEnabled(false);
 			panel_4.add(valor);
 		}
-		
+
 	}
-	
 
 	private void crearBotonComprobar() {
 		botonComprobar = new JButton("Comprobar");
@@ -216,34 +205,35 @@ public class Juego implements ActionListener {
 		frame.getContentPane().add(botonComprobar);
 		botonComprobar.addActionListener(this);
 	}
-	
+
 	private Tablero volcarResultadosDeCampos(Tablero tablero) {
-		for(int i=0;i<textFields.length;i++) {
-			for(int j=0;j<textFields[0].length;j++) {
-				tablero.getCuadricula()[i][j]=Integer.parseInt(textFields[i][j].getText());
+		for (int i = 0; i < textFields.length; i++) {
+			for (int j = 0; j < textFields[0].length; j++) {
+				tablero.getCuadricula()[i][j] = Integer.parseInt(textFields[i][j].getText());
 			}
 		}
 		return tablero;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() == botonComprobar) {
-				if(utilidades.verificarTableroCompleto(volcarResultadosDeCampos(tablero))) {
-					JOptionPane.showMessageDialog(null,"Felicidades, Ganaste!", "Felicitaciones!", JOptionPane.PLAIN_MESSAGE);
+				if (utilidades.verificarTableroCompleto(volcarResultadosDeCampos(tablero))) {
+					JOptionPane.showMessageDialog(null, "Felicidades, Ganaste!", "Felicitaciones!",
+							JOptionPane.PLAIN_MESSAGE);
 					botonComprobar.setEnabled(false);
-				}
-				else {
-					JOptionPane.showMessageDialog(null,"Las sumas son incorrectas, perdiste!", "Segui participando", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Las sumas son incorrectas, perdiste!", "Segui participando",
+							JOptionPane.ERROR_MESSAGE);
 					botonComprobar.setEnabled(false);
-					
+
 				}
 			}
 		} catch (NumberFormatException IllegalArgumentException) {
-			JOptionPane.showMessageDialog(null,"El tablero aún no está completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null,"El tablero aun no esta completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
 		}
-		
+
 		if (e.getSource() == reiniciar) {
 			frame.dispose();
 			VentanaPrincipal nuevo= new VentanaPrincipal();
@@ -257,29 +247,14 @@ public class Juego implements ActionListener {
 			//panel.setBackground(comojugar.png);
 			ventanaayuda.add(panel);
 			ventanaayuda.setEnabled(true);
+
+
 		}
 		if (e.getSource() == acercaDe) {
-			JOptionPane.showMessageDialog(null,"	Juegos Aritméticos ® \n" 
+			JOptionPane.showMessageDialog(null,"	Juegos Aritmeticos ® \n" 
 											+ "		Devs: Guillermo Arditti, Marcelo Palacios, Nancy Nores. \n"
 											, "Acerca de", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
-	
-	/**
-	 * Launch the application.
-	 */
-	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//
-//			public void run() {
-//				try {
-//					Juego window = new Juego();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
 }
