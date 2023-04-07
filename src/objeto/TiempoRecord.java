@@ -1,11 +1,11 @@
 package objeto;
 
 public class TiempoRecord {
-	
+
 	private int mejorTiempo;
 
 	public TiempoRecord() {
-		
+
 	}
 
 	public int getMejorTiempo() {
@@ -15,6 +15,5 @@ public class TiempoRecord {
 	public void setMejorTiempo(int mejorTiempo) {
 		this.mejorTiempo = mejorTiempo;
 	}
-	
-	
+
 }
