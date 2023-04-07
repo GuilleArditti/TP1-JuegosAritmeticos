@@ -35,8 +35,9 @@ public class VentanaPrincipal implements ActionListener {
 
 		// Ventana Principal
 		frame = new JFrame();
+		frame.setBounds(100, 100, 500, 500);
 		frame.getContentPane().setBackground(Color.BLUE);
-		frame.setTitle("Bienvenido a Juegos Aritm�ticos");
+		frame.setTitle("Bienvenido a Juegos Aritmeticos");
 		frame.getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);

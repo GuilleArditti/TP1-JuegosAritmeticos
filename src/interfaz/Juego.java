@@ -40,6 +40,7 @@ public class Juego implements ActionListener {
 	private JTextField[][] textFields;
 	private LogicaDelTablero utilidades = new LogicaDelTablero();
 	private Tablero tablero;
+	private int contador=3;
 
 	public Juego(Tablero tablero) {
 		this.tablero = tablero;
@@ -59,6 +60,7 @@ public class Juego implements ActionListener {
 
 		// Tablero
 		crearTablero(tablero);
+		
 
 		// Resultados
 		crearResultados(tablero);
@@ -66,20 +68,13 @@ public class Juego implements ActionListener {
 		// Boton Iniciar!
 		crearBotonComprobar();
 
-		// Chequear sumas en tiempo de ejecucion
-		chequearSumasActuales();
-
-	}
-
-	private void chequearSumasActuales() {
-		// TODO - pintar filas de verde
 	}
 
 	// Funciones
 
 	private void crearVentana() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 600);
+		frame.setBounds(100, 100, 500, 500);
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Tablero");
 		frame.getContentPane().setBackground(new Color(128, 0, 0));
@@ -127,7 +122,7 @@ public class Juego implements ActionListener {
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel.setBackground(Color.BLACK);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(20, 50, 259, 188);
+		panel.setBounds(20, 50, 300, 200);
 		frame.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(tablero.getDimension(), tablero.getDimension(), 1, 1));
 
@@ -163,7 +158,7 @@ public class Juego implements ActionListener {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.BLACK);
 		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_3.setBounds(287, 50, 50, 188);
+		panel_3.setBounds(325, 50, 50, 200);
 		panel_3.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
 		frame.getContentPane().add(panel_3);
@@ -171,10 +166,11 @@ public class Juego implements ActionListener {
 		for (int i = 0; i < tablero.getResultadosFilas().length; i++) {
 			JButton valor = new JButton(String.valueOf(tablero.getResultadosFilas()[i]));
 			valor.setMinimumSize(new Dimension(10, 10));
-			valor.setMaximumSize(new Dimension(65, 30));
+			valor.setMaximumSize(new Dimension(70, 27));
 			valor.setPreferredSize(new Dimension(45, 70));
 			valor.setEnabled(false);
 			panel_3.add(valor);
+			
 		}
 
 		// Representacion numeros columnas
@@ -184,14 +180,14 @@ public class Juego implements ActionListener {
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_4.setBackground(Color.BLACK);
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_4.setBounds(20, 246, 260, 20);
+		panel_4.setBounds(20, 255, 300, 30);
 		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		frame.getContentPane().add(panel_4);
 
 		for (int i = 0; i < tablero.getResultadosColumnas().length; i++) {
 			JButton valor = new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
-			valor.setMinimumSize(new Dimension(10, 10));
-			valor.setMaximumSize(new Dimension(70, 70));
+			valor.setMinimumSize(new Dimension(20, 20));
+			valor.setMaximumSize(new Dimension(75, 70));
 			valor.setPreferredSize(new Dimension(65, 90));
 			valor.setEnabled(false);
 			panel_4.add(valor);
@@ -201,12 +197,12 @@ public class Juego implements ActionListener {
 
 	private void crearBotonComprobar() {
 		botonComprobar = new JButton("Comprobar");
-		botonComprobar.setBounds(341, 246, 104, 25);
+		botonComprobar.setBounds(345, 270, 104, 25);
 		frame.getContentPane().add(botonComprobar);
 		botonComprobar.addActionListener(this);
 	}
 
-	private Tablero volcarResultadosDeCampos(Tablero tablero) {
+	private Tablero volcarResultadosDeCampos() {
 		for (int i = 0; i < textFields.length; i++) {
 			for (int j = 0; j < textFields[0].length; j++) {
 				tablero.getCuadricula()[i][j] = Integer.parseInt(textFields[i][j].getText());
@@ -214,47 +210,95 @@ public class Juego implements ActionListener {
 		}
 		return tablero;
 	}
+	
+	private void marcarSumasCorrectas() { 
+		cambiarColorFilasCorrectas();	
+		cambiarColorColumnasCorrectas();	
+	}
+	
+	private void cambiarColorFilasCorrectas() {
+		int suma;
+		for (int i = 0; i < textFields.length; i++) {
+			suma=0;
+			for (int j = 0; j < textFields[0].length; j++) {
+				suma=suma+Integer.parseInt(textFields[i][j].getText());
+			}
+			if(suma==tablero.getResultadosFilas()[i]) {
+				for(int j=0;j<textFields[0].length;j++) {
+					textFields[i][j].setBackground(Color.GREEN);
+				}
+			}
+			else {
+				for(int j=0;j<textFields[0].length;j++) {
+					textFields[i][j].setBackground(Color.RED);
+				}
+			}
+		}			
+	}
+	
+	private void cambiarColorColumnasCorrectas() {
+		int suma;
+		for (int i = 0; i < textFields[0].length; i++) {
+			suma=0;
+			for (int j = 0; j < textFields.length; j++) {
+				suma=suma+Integer.parseInt(textFields[j][i].getText());
+			}
+			if(suma==tablero.getResultadosColumnas()[i]) {
+				for(int j=0;j<textFields[0].length;j++) {
+					textFields[j][i].setBackground(Color.GREEN);
+				}
+			}
+			else {
+				for(int j=0;j<textFields[0].length;j++) {
+					if(!(textFields[j][i].getBackground().equals(Color.GREEN)));
+						textFields[j][i].setBackground(Color.RED);
+				}
+			}	
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() == botonComprobar) {
-				if (utilidades.verificarTableroCompleto(volcarResultadosDeCampos(tablero))) {
+				marcarSumasCorrectas();
+				if (utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador >= 0) {
 					JOptionPane.showMessageDialog(null, "Felicidades, Ganaste!", "Felicitaciones!",
 							JOptionPane.PLAIN_MESSAGE);
 					botonComprobar.setEnabled(false);
-				} else {
-					JOptionPane.showMessageDialog(null, "Las sumas son incorrectas, perdiste!", "Segui participando",
+				}
+				if (!utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador > 0) {
+					JOptionPane.showMessageDialog(null, "Intentos restantes: "+ contador, "ERROR!  Sumas incorrectas" ,
 							JOptionPane.ERROR_MESSAGE);
-					botonComprobar.setEnabled(false);
-
+					contador--;
+				} else {
+					if (!utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador == 0) {
+						JOptionPane.showMessageDialog(null, "Las sumas son incorrectas y te quedaste sin intentos! :(",
+								"Segui participando", JOptionPane.ERROR_MESSAGE);
+						botonComprobar.setEnabled(false);
+					}
 				}
 			}
+
 		} catch (NumberFormatException IllegalArgumentException) {
-			JOptionPane.showMessageDialog(null,"El tablero aun no esta completo!!", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "El tablero aun no esta completo!!", "Advertencia",
+					JOptionPane.WARNING_MESSAGE);
 		}
 
 		if (e.getSource() == reiniciar) {
 			frame.dispose();
-			VentanaPrincipal nuevo= new VentanaPrincipal();
+			VentanaPrincipal nuevo = new VentanaPrincipal();
 		}
 		if (e.getSource() == salir) {
 			frame.dispose();
 		}
 		if (e.getSource() == comoJugar) {
-			JFrame ventanaayuda = new JFrame();
-			JLabel panel = new JLabel();
-			//panel.setBackground(comojugar.png);
-			ventanaayuda.add(panel);
-			ventanaayuda.setEnabled(true);
-
 
 		}
 		if (e.getSource() == acercaDe) {
-			JOptionPane.showMessageDialog(null,"	Juegos Aritmeticos ® \n" 
-											+ "		Devs: Guillermo Arditti, Marcelo Palacios, Nancy Nores. \n"
-											, "Acerca de", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null,
+					"	Juegos Aritmeticos ® \n" + "		Devs: Guillermo Arditti, Marcelo Palacios, Nancy Nores. \n",
+					"Acerca de", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
-
 }

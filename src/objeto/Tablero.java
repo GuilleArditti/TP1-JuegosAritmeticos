@@ -1,34 +1,18 @@
 package objeto;
 
-import java.util.Random;
-
-
 public class Tablero {
 
 	private int dimension;
 	private int[] resultadosFilas;
 	private int[] resultadosColumnas;
 	private int[][] cuadricula;
-	private int maximoPosible;
-	private int minimoPosible;
 	
 	public Tablero(int dimension) {
-		validarDimension(dimension);
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
-		this.maximoPosible = dimension*4;
-		this.minimoPosible = dimension;
 		generarResultadosFilasYColumnas();
 	}
 	
-	private void validarDimension(int dimension) {
-
-		if (dimension < 4)
-			throw new IllegalArgumentException("La dimension no puede ser menor que 4");
-		if (dimension > 10)
-			throw new IllegalArgumentException("La dimension no puede ser mayor que 10");
-	}
-
 	public int[][] getCuadricula() {
 		return cuadricula;
 	}
