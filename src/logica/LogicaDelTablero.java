@@ -6,7 +6,7 @@ import objeto.Tablero;
 
 public class LogicaDelTablero {
 
-	Scanner scan = new Scanner(System.in);
+	private Scanner scan = new Scanner(System.in);
 
 	public Tablero generarTablero(int dimension) {
 		return new Tablero(dimension);
