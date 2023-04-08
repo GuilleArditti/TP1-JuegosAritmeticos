@@ -6,13 +6,23 @@ public class Tablero {
 	private int[] resultadosFilas;
 	private int[] resultadosColumnas;
 	private int[][] cuadricula;
+	private int[][] solucionDelTablero;
 	
 	public Tablero(int dimension) {
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
+		this.solucionDelTablero=new int[dimension][dimension];
 		generarResultadosFilasYColumnas();
 	}
-	
+		
+	public int[][] getSolucionDelTablero() {
+		return solucionDelTablero;
+	}
+
+	public void setSolucionDelTablero(int[][] solucionDelTablero) {
+		this.solucionDelTablero = solucionDelTablero;
+	}
+
 	public int[][] getCuadricula() {
 		return cuadricula;
 	}
@@ -59,6 +69,7 @@ public class Tablero {
 			}
 			resultadosFilas[i]=suma;
 		}
+		setSolucionDelTablero(tablero);
 		setResultadosFilas(resultadosFilas);;
 		
 		for (int j = 0; j < tablero.length; j++) {

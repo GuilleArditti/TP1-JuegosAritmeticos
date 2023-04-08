@@ -24,6 +24,7 @@ import java.awt.Font;
 import logica.LogicaDelTablero;
 import objeto.Tablero;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 
 public class Juego implements ActionListener {
 
@@ -36,11 +37,13 @@ public class Juego implements ActionListener {
 	private JMenuItem acercaDe;
 	private JMenuItem comoJugar;
 	private JButton botonComprobar;
+	private JButton botonRendirse;
 	private JPanel panel;
 	private JTextField[][] textFields;
 	private LogicaDelTablero utilidades = new LogicaDelTablero();
 	private Tablero tablero;
 	private int contador=3;
+	
 
 	public Juego(Tablero tablero) {
 		this.tablero = tablero;
@@ -61,12 +64,14 @@ public class Juego implements ActionListener {
 		// Tablero
 		crearTablero(tablero);
 		
-
 		// Resultados
 		crearResultados(tablero);
 
 		// Boton Iniciar!
 		crearBotonComprobar();
+		
+		// Boton Rendirse
+		crearBotonRendirse();
 
 	}
 
@@ -74,12 +79,16 @@ public class Juego implements ActionListener {
 
 	private void crearVentana() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 500);
+		frame.setBounds(100, 100, 500, 450);
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Tablero");
 		frame.getContentPane().setBackground(new Color(128, 0, 0));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		// Icono ventana
+				ImageIcon image = new ImageIcon("descarga.png");
+				frame.setIconImage(image.getImage());
 	}
 
 	private void crearMenu() {
@@ -103,7 +112,7 @@ public class Juego implements ActionListener {
 		opciones.add(salir);
 
 		// Item Ayuda
-		comoJugar = new JMenuItem("Como Jugar?");
+		comoJugar = new JMenuItem("¿Como Jugar?");
 		comoJugar.addActionListener(this);
 
 		acercaDe = new JMenuItem("Acerca De");
@@ -130,7 +139,6 @@ public class Juego implements ActionListener {
 		for (int i = 0; i < textFields.length; i++) {
 			for (int j = 0; j < textFields[0].length; j++) {
 				textFields[i][j] = new JTextField();
-				System.out.println(textFields[i][j].getText());
 				textFields[i][j].setFont(new Font("Tahoma", Font.PLAIN, 12));
 				textFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(textFields[i][j]);
@@ -175,8 +183,6 @@ public class Juego implements ActionListener {
 
 		// Representacion numeros columnas
 		JPanel panel_4 = new JPanel();
-		panel_4.setPreferredSize(new Dimension(tablero.getResultadosColumnas().length, 1));
-		panel_4.setMinimumSize(new Dimension(tablero.getResultadosColumnas().length, 1));
 		panel_4.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		panel_4.setBackground(Color.BLACK);
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -186,7 +192,7 @@ public class Juego implements ActionListener {
 
 		for (int i = 0; i < tablero.getResultadosColumnas().length; i++) {
 			JButton valor = new JButton(String.valueOf(tablero.getResultadosColumnas()[i]));
-			valor.setMinimumSize(new Dimension(20, 20));
+			valor.setMinimumSize(new Dimension(10, 10));
 			valor.setMaximumSize(new Dimension(75, 70));
 			valor.setPreferredSize(new Dimension(65, 90));
 			valor.setEnabled(false);
@@ -200,6 +206,13 @@ public class Juego implements ActionListener {
 		botonComprobar.setBounds(345, 270, 104, 25);
 		frame.getContentPane().add(botonComprobar);
 		botonComprobar.addActionListener(this);
+	}
+	
+	private void crearBotonRendirse() {
+		botonRendirse= new JButton("Rendirse?");
+		botonRendirse.setBounds(345, 310, 104, 25);
+		frame.getContentPane().add(botonRendirse);
+		botonRendirse.addActionListener(this);
 	}
 
 	private Tablero volcarResultadosDeCampos() {
@@ -215,6 +228,20 @@ public class Juego implements ActionListener {
 		cambiarColorFilasCorrectas();	
 		cambiarColorColumnasCorrectas();	
 	}
+	
+	private void mostrarSolucion() {
+		for (int i = 0; i < textFields.length; i++) {
+			for (int j = 0; j < textFields[0].length; j++) {
+				textFields[i][j].setText(String.valueOf(tablero.getSolucionDelTablero()[i][j]));
+				textFields[i][j].setFont(new Font("Tahoma", Font.BOLD, 12));
+				textFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+				panel.add(textFields[i][j]);
+				textFields[i][j].setColumns(tablero.getDimension());
+				textFields[i][j].setBackground(Color.BLUE);
+				textFields[i][j].setEnabled(false);
+			}
+		}
+			}
 	
 	private void cambiarColorFilasCorrectas() {
 		int suma;
@@ -268,7 +295,7 @@ public class Juego implements ActionListener {
 					botonComprobar.setEnabled(false);
 				}
 				if (!utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador > 0) {
-					JOptionPane.showMessageDialog(null, "Intentos restantes: "+ contador, "ERROR!  Sumas incorrectas" ,
+					JOptionPane.showMessageDialog(null, "Intentos restantes: " + contador, "ERROR!  Sumas incorrectas",
 							JOptionPane.ERROR_MESSAGE);
 					contador--;
 				} else {
@@ -284,6 +311,15 @@ public class Juego implements ActionListener {
 			JOptionPane.showMessageDialog(null, "El tablero aun no esta completo!!", "Advertencia",
 					JOptionPane.WARNING_MESSAGE);
 		}
+		
+		if(e.getSource()==botonRendirse) {
+			int respuesta=JOptionPane.showConfirmDialog(null, "Desea rendirse y mostrar una solución?", "Rendirse", JOptionPane.YES_NO_OPTION);
+			if(respuesta==JOptionPane.YES_OPTION) {
+				botonComprobar.setEnabled(false);
+				botonRendirse.setEnabled(false);
+				mostrarSolucion();
+			}
+		}
 
 		if (e.getSource() == reiniciar) {
 			frame.dispose();
@@ -293,7 +329,9 @@ public class Juego implements ActionListener {
 			frame.dispose();
 		}
 		if (e.getSource() == comoJugar) {
-
+			JOptionPane.showMessageDialog(null, "El jugador debe adivinar que numero poner en cada casillero de la grilla, de modo\n"
+					+ "tal que la suma de los numeros de cada fila y columna sea igual al valor dado respectivamente.", "¿Como Jugar?",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		if (e.getSource() == acercaDe) {
 			JOptionPane.showMessageDialog(null,
