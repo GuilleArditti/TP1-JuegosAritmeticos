@@ -6,14 +6,19 @@ public class Tablero {
 	private int[] resultadosFilas;
 	private int[] resultadosColumnas;
 	private int[][] cuadricula;
+<<<<<<< HEAD
 	private int[][] solucionDelTablero;
 	
+=======
+
+>>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 	public Tablero(int dimension) {
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
 		this.solucionDelTablero=new int[dimension][dimension];
 		generarResultadosFilasYColumnas();
 	}
+<<<<<<< HEAD
 		
 	public int[][] getSolucionDelTablero() {
 		return solucionDelTablero;
@@ -22,6 +27,8 @@ public class Tablero {
 	public void setSolucionDelTablero(int[][] solucionDelTablero) {
 		this.solucionDelTablero = solucionDelTablero;
 	}
+=======
+>>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 
 	public int[][] getCuadricula() {
 		return cuadricula;
@@ -54,36 +61,41 @@ public class Tablero {
 	public void setDimension(int dimension) {
 		this.dimension = dimension;
 	}
-	
+
 	public void generarResultadosFilasYColumnas() {
-		int[][] tablero= new int[dimension][dimension];
-		int[] resultadosFilas= new int[dimension];
-		int[] resultadosColumnas= new int[dimension];
+		int[][] tablero = new int[dimension][dimension];
+		int[] resultadosFilas = new int[dimension];
+		int[] resultadosColumnas = new int[dimension];
 		int suma;
 		for (int i = 0; i < tablero.length; i++) {
-			suma=0;
+			suma = 0;
 			for (int j = 0; j < tablero[0].length; j++) {
-				int numero = (int)(Math.random()*10+1);
+				int numero = (int) (Math.random() * 10 + 1);
 				tablero[i][j] = numero;
-				suma=suma+numero;
+				suma = suma + numero;
 			}
-			resultadosFilas[i]=suma;
+			resultadosFilas[i] = suma;
 		}
+<<<<<<< HEAD
 		setSolucionDelTablero(tablero);
 		setResultadosFilas(resultadosFilas);;
 		
+=======
+		setResultadosFilas(resultadosFilas);
+
+>>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 		for (int j = 0; j < tablero.length; j++) {
-			suma=0;
+			suma = 0;
 			for (int i = 0; i < tablero.length; i++) {
-				suma=suma+tablero[i][j];
+				suma = suma + tablero[i][j];
 			}
-			resultadosColumnas[j]=suma;
+			resultadosColumnas[j] = suma;
 		}
-		setResultadosColumnas(resultadosColumnas);;
-		MostrarTablero(tablero,resultadosFilas,resultadosColumnas);
+		setResultadosColumnas(resultadosColumnas);
+//		MostrarTablero(tablero, resultadosFilas, resultadosColumnas);
 	}
 
-	public void MostrarTablero(int [][] tablero, int[] filas, int[] columnas) {					//Metodo de Prueba para consola
+	public void MostrarTablero(int[][] tablero, int[] filas, int[] columnas) { // Metodo de Prueba para consola
 		for (int i = 0; i < tablero.length; i++) {
 			System.out.print("[");
 			for (int j = 0; j < tablero[0].length; j++) {
@@ -92,13 +104,13 @@ public class Tablero {
 					System.out.print("] ");
 					System.out.print(getResultadosFilas()[i]);
 					System.out.println("");
-					
+
 				}
 			}
 		}
 		System.out.println(" ");
-		for(int i=0;i<getResultadosColumnas().length;i++) {
-			System.out.print(getResultadosColumnas()[i] +" ");
+		for (int i = 0; i < getResultadosColumnas().length; i++) {
+			System.out.print(getResultadosColumnas()[i] + " ");
 		}
 	}
 

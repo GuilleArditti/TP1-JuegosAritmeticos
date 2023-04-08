@@ -34,7 +34,15 @@ public class VentanaPrincipal implements ActionListener {
 	private void initialize() {
 
 		// Ventana Principal
+		crearVentanaPrincipal();
+
+		agregarBotones();
+		
+	}
+
+	private void crearVentanaPrincipal() {
 		frame = new JFrame();
+		frame.setLocationRelativeTo(null);
 		frame.setBounds(100, 100, 500, 500);
 		frame.getContentPane().setBackground(Color.BLUE);
 		frame.setTitle("Bienvenido a Juegos Aritmeticos");
@@ -55,7 +63,9 @@ public class VentanaPrincipal implements ActionListener {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(75, 24, 287, 48);
 		frame.getContentPane().add(lblNewLabel);
-
+	}
+	
+	private void agregarBotones() {
 		// Boton Jugar!
 		BotonIniciarJuego = new JButton("Jugar!");
 		BotonIniciarJuego.setBorder(null);

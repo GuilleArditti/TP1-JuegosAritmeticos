@@ -42,8 +42,12 @@ public class Juego implements ActionListener {
 	private JTextField[][] textFields;
 	private LogicaDelTablero utilidades = new LogicaDelTablero();
 	private Tablero tablero;
+<<<<<<< HEAD
 	private int contador=3;
 	
+=======
+	private int contador = 3;
+>>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 
 	public Juego(Tablero tablero) {
 		this.tablero = tablero;
@@ -63,7 +67,11 @@ public class Juego implements ActionListener {
 
 		// Tablero
 		crearTablero(tablero);
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 		// Resultados
 		crearResultados(tablero);
 
@@ -178,7 +186,7 @@ public class Juego implements ActionListener {
 			valor.setPreferredSize(new Dimension(45, 70));
 			valor.setEnabled(false);
 			panel_3.add(valor);
-			
+
 		}
 
 		// Representacion numeros columnas
@@ -223,11 +231,12 @@ public class Juego implements ActionListener {
 		}
 		return tablero;
 	}
-	
-	private void marcarSumasCorrectas() { 
-		cambiarColorFilasCorrectas();	
-		cambiarColorColumnasCorrectas();	
+
+	private void marcarSumasCorrectas() {
+		cambiarColorFilasCorrectas();
+		cambiarColorColumnasCorrectas();
 	}
+<<<<<<< HEAD
 	
 	private void mostrarSolucion() {
 		for (int i = 0; i < textFields.length; i++) {
@@ -243,44 +252,46 @@ public class Juego implements ActionListener {
 		}
 			}
 	
+=======
+
+>>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 	private void cambiarColorFilasCorrectas() {
 		int suma;
 		for (int i = 0; i < textFields.length; i++) {
-			suma=0;
+			suma = 0;
 			for (int j = 0; j < textFields[0].length; j++) {
-				suma=suma+Integer.parseInt(textFields[i][j].getText());
+				suma = suma + Integer.parseInt(textFields[i][j].getText());
 			}
-			if(suma==tablero.getResultadosFilas()[i]) {
-				for(int j=0;j<textFields[0].length;j++) {
+			if (suma == tablero.getResultadosFilas()[i]) {
+				for (int j = 0; j < textFields[0].length; j++) {
 					textFields[i][j].setBackground(Color.GREEN);
 				}
-			}
-			else {
-				for(int j=0;j<textFields[0].length;j++) {
+			} else {
+				for (int j = 0; j < textFields[0].length; j++) {
 					textFields[i][j].setBackground(Color.RED);
 				}
 			}
-		}			
+		}
 	}
-	
+
 	private void cambiarColorColumnasCorrectas() {
 		int suma;
 		for (int i = 0; i < textFields[0].length; i++) {
-			suma=0;
+			suma = 0;
 			for (int j = 0; j < textFields.length; j++) {
-				suma=suma+Integer.parseInt(textFields[j][i].getText());
+				suma = suma + Integer.parseInt(textFields[j][i].getText());
 			}
-			if(suma==tablero.getResultadosColumnas()[i]) {
-				for(int j=0;j<textFields[0].length;j++) {
+			if (suma == tablero.getResultadosColumnas()[i]) {
+				for (int j = 0; j < textFields[0].length; j++) {
 					textFields[j][i].setBackground(Color.GREEN);
 				}
-			}
-			else {
-				for(int j=0;j<textFields[0].length;j++) {
-					if(!(textFields[j][i].getBackground().equals(Color.GREEN)));
-						textFields[j][i].setBackground(Color.RED);
+			} else {
+				for (int j = 0; j < textFields[0].length; j++) {
+					if (!(textFields[j][i].getBackground().equals(Color.GREEN)))
+						;
+					textFields[j][i].setBackground(Color.RED);
 				}
-			}	
+			}
 		}
 	}
 
@@ -335,7 +346,7 @@ public class Juego implements ActionListener {
 		}
 		if (e.getSource() == acercaDe) {
 			JOptionPane.showMessageDialog(null,
-					"	Juegos Aritmeticos ® \n" + "		Devs: Guillermo Arditti, Marcelo Palacios, Nancy Nores. \n",
+					"	Juegos Aritmeticos ï¿½ \n" + "		Devs: Guillermo Arditti, Marcelo Palacios, Nancy Nores. \n",
 					"Acerca de", JOptionPane.PLAIN_MESSAGE);
 		}
 	}

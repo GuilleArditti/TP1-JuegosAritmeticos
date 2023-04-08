@@ -6,7 +6,7 @@ import objeto.Tablero;
 
 public class LogicaDelTablero {
 
-	Scanner scan = new Scanner(System.in);
+	private Scanner scan = new Scanner(System.in);
 
 	public Tablero generarTablero(int dimension) {
 		return new Tablero(dimension);
@@ -40,23 +40,6 @@ public class LogicaDelTablero {
 
 	public boolean verificarTableroCompleto(Tablero t) {
 		return sumaFilasCorrectas(t) && sumaColumnasCorrectas(t);
-	}
-
-	private void validarNumeroIntroducido(int numero) {
-		if (numero < 1 || numero > 9)
-			throw new IllegalArgumentException("El n�mero introducido debe estar entre 1 y 9");
-	}
-
-	public void llenarTablero(Tablero t) { // Metodo de Prueba para consola
-		int numero;
-		for (int i = 0; i < t.getCuadricula().length; i++) {
-			for (int j = 0; j < t.getCuadricula()[0].length; j++) {
-				System.out.println("Ingrese un numero para la posici�n " + i + ", " + j);
-				numero = scan.nextInt();
-				validarNumeroIntroducido(numero);
-				t.getCuadricula()[i][j] = numero;
-			}
-		}
 	}
 
 	public void MostrarTablero(Tablero t) { // Metodo de Prueba para consola
