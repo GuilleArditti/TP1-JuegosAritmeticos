@@ -60,7 +60,6 @@ public class Tablero {
 			resultadosFilas[i] = suma;
 		}
 		setResultadosFilas(resultadosFilas);
-		;
 
 		for (int j = 0; j < tablero.length; j++) {
 			suma = 0;
@@ -70,7 +69,7 @@ public class Tablero {
 			resultadosColumnas[j] = suma;
 		}
 		setResultadosColumnas(resultadosColumnas);
-		MostrarTablero(tablero, resultadosFilas, resultadosColumnas);
+//		MostrarTablero(tablero, resultadosFilas, resultadosColumnas);
 	}
 
 	public void MostrarTablero(int[][] tablero, int[] filas, int[] columnas) { // Metodo de Prueba para consola
