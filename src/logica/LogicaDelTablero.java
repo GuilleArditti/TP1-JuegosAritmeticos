@@ -1,12 +1,9 @@
 package logica;
 
-import java.util.Scanner;
-
 import objeto.Tablero;
 
 public class LogicaDelTablero {
 
-	private Scanner scan = new Scanner(System.in);
 
 	public Tablero generarTablero(int dimension) {
 		return new Tablero(dimension);
@@ -51,7 +48,6 @@ public class LogicaDelTablero {
 					System.out.print("] ");
 					System.out.print(t.getResultadosFilas()[i]);
 					System.out.println("");
-
 				}
 			}
 		}

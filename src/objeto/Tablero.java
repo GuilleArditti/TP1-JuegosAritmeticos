@@ -6,19 +6,15 @@ public class Tablero {
 	private int[] resultadosFilas;
 	private int[] resultadosColumnas;
 	private int[][] cuadricula;
-<<<<<<< HEAD
 	private int[][] solucionDelTablero;
 	
-=======
-
->>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 	public Tablero(int dimension) {
 		this.dimension = dimension;
 		this.cuadricula = new int[dimension][dimension];
 		this.solucionDelTablero=new int[dimension][dimension];
 		generarResultadosFilasYColumnas();
 	}
-<<<<<<< HEAD
+
 		
 	public int[][] getSolucionDelTablero() {
 		return solucionDelTablero;
@@ -27,8 +23,7 @@ public class Tablero {
 	public void setSolucionDelTablero(int[][] solucionDelTablero) {
 		this.solucionDelTablero = solucionDelTablero;
 	}
-=======
->>>>>>> bee4842f06100529e307787da5ec9120a14953b7
+
 
 	public int[][] getCuadricula() {
 		return cuadricula;
@@ -76,14 +71,9 @@ public class Tablero {
 			}
 			resultadosFilas[i] = suma;
 		}
-<<<<<<< HEAD
 		setSolucionDelTablero(tablero);
-		setResultadosFilas(resultadosFilas);;
-		
-=======
 		setResultadosFilas(resultadosFilas);
 
->>>>>>> bee4842f06100529e307787da5ec9120a14953b7
 		for (int j = 0; j < tablero.length; j++) {
 			suma = 0;
 			for (int i = 0; i < tablero.length; i++) {
@@ -92,10 +82,10 @@ public class Tablero {
 			resultadosColumnas[j] = suma;
 		}
 		setResultadosColumnas(resultadosColumnas);
-//		MostrarTablero(tablero, resultadosFilas, resultadosColumnas);
+		MostrarTablero(tablero, resultadosFilas, resultadosColumnas);
 	}
 
-	public void MostrarTablero(int[][] tablero, int[] filas, int[] columnas) { // Metodo de Prueba para consola
+	private void MostrarTablero(int[][] tablero, int[] filas, int[] columnas) { // Metodo de Prueba para consola
 		for (int i = 0; i < tablero.length; i++) {
 			System.out.print("[");
 			for (int j = 0; j < tablero[0].length; j++) {
