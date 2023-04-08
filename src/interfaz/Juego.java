@@ -39,7 +39,7 @@ public class Juego implements ActionListener {
 	private JButton botonComprobar;
 	private JButton botonRendirse;
 	private JPanel panel;
-	private JTextField[][] textFields;
+	private JTextField[][] camposDeTexto;
 	private LogicaDelTablero utilidades = new LogicaDelTablero();
 	private Tablero tablero;
 	private int contador = 3;
@@ -47,10 +47,10 @@ public class Juego implements ActionListener {
 
 	public Juego(Tablero tablero) {
 		this.tablero = tablero;
-		initialize();
+		inicializar();
 	}
 
-	private void initialize() {
+	private void inicializar() {
 
 		// Ventana
 		crearVentana();
@@ -62,16 +62,13 @@ public class Juego implements ActionListener {
 		mostrarTiempo();
 
 		// Tablero
-		crearTablero(tablero);
+		mostrarGrilla(tablero);
 
 		// Resultados
-		crearResultados(tablero);
+		mostrarValoresDeLaGrilla(tablero);
 
-		// Boton Iniciar!
-		crearBotonComprobar();
-		
-		// Boton Rendirse
-		crearBotonRendirse();
+		// Botones
+		crearBotones();
 
 	}
 
@@ -122,7 +119,7 @@ public class Juego implements ActionListener {
 		ayuda.add(acercaDe);
 	}
 
-	private void crearTablero(Tablero tablero) {
+	private void mostrarGrilla(Tablero tablero) {
 
 		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(tablero.getDimension(), tablero.getDimension()));
@@ -135,14 +132,14 @@ public class Juego implements ActionListener {
 		frame.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(tablero.getDimension(), tablero.getDimension(), 1, 1));
 
-		textFields = new JTextField[tablero.getDimension()][tablero.getDimension()];
-		for (int i = 0; i < textFields.length; i++) {
-			for (int j = 0; j < textFields[0].length; j++) {
-				textFields[i][j] = new JTextField();
-				textFields[i][j].setFont(new Font("Tahoma", Font.PLAIN, 12));
-				textFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
-				panel.add(textFields[i][j]);
-				textFields[i][j].setColumns(tablero.getDimension());
+		camposDeTexto = new JTextField[tablero.getDimension()][tablero.getDimension()];
+		for (int i = 0; i < camposDeTexto.length; i++) {
+			for (int j = 0; j < camposDeTexto[0].length; j++) {
+				camposDeTexto[i][j] = new JTextField();
+				camposDeTexto[i][j].setFont(new Font("Tahoma", Font.PLAIN, 12));
+				camposDeTexto[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+				panel.add(camposDeTexto[i][j]);
+				camposDeTexto[i][j].setColumns(tablero.getDimension());
 			}
 		}
 	}
@@ -161,7 +158,8 @@ public class Juego implements ActionListener {
 		frame.getContentPane().add(panel_2);
 	}
 
-	private void crearResultados(Tablero tablero) {
+	private void mostrarValoresDeLaGrilla(Tablero tablero) {
+		
 		// Representacion numeros filas
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.BLACK);
@@ -199,27 +197,25 @@ public class Juego implements ActionListener {
 		}
 	}
 
-	private void crearBotonComprobar() {
+	private void crearBotones() {
+		
 		botonComprobar = new JButton("Comprobar");
 		botonComprobar.setBounds(345, 270, 104, 25);
 		frame.getContentPane().add(botonComprobar);
 		botonComprobar.addActionListener(this);
-	}
-	
-	private void crearBotonRendirse() {
+		
 		botonRendirse= new JButton("Rendirse?");
 		botonRendirse.setBounds(345, 310, 104, 25);
 		frame.getContentPane().add(botonRendirse);
 		botonRendirse.addActionListener(this);
 	}
 
-	private Tablero volcarResultadosDeCampos() {
-		for (int i = 0; i < textFields.length; i++) {
-			for (int j = 0; j < textFields[0].length; j++) {
-				tablero.getCuadricula()[i][j] = Integer.parseInt(textFields[i][j].getText());
+	private void volcarResultadosDeCamposEnTablero() {
+		for (int i = 0; i < camposDeTexto.length; i++) {
+			for (int j = 0; j < camposDeTexto[0].length; j++) {
+				tablero.getCuadricula()[i][j] = Integer.parseInt(camposDeTexto[i][j].getText());
 			}
-		}
-		return tablero;
+		}	
 	}
 
 	private void marcarSumasCorrectas() {
@@ -228,33 +224,33 @@ public class Juego implements ActionListener {
 	}
 
 	private void mostrarSolucion() {
-		for (int i = 0; i < textFields.length; i++) {
-			for (int j = 0; j < textFields[0].length; j++) {
-				textFields[i][j].setText(String.valueOf(tablero.getSolucionDelTablero()[i][j]));
-				textFields[i][j].setFont(new Font("Tahoma", Font.BOLD, 12));
-				textFields[i][j].setHorizontalAlignment(SwingConstants.CENTER);
-				panel.add(textFields[i][j]);
-				textFields[i][j].setColumns(tablero.getDimension());
-				textFields[i][j].setBackground(Color.BLUE);
-				textFields[i][j].setEnabled(false);
+		for (int i = 0; i < camposDeTexto.length; i++) {
+			for (int j = 0; j < camposDeTexto[0].length; j++) {
+				camposDeTexto[i][j].setText(String.valueOf(tablero.getSolucionDelTablero()[i][j]));
+				camposDeTexto[i][j].setFont(new Font("Tahoma", Font.BOLD, 12));
+				camposDeTexto[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+				panel.add(camposDeTexto[i][j]);
+				camposDeTexto[i][j].setColumns(tablero.getDimension());
+				camposDeTexto[i][j].setBackground(Color.BLUE);
+				camposDeTexto[i][j].setEnabled(false);
 			}
 		}
 	}	
 
 	private void cambiarColorFilasCorrectas() {
 		int suma;
-		for (int i = 0; i < textFields.length; i++) {
+		for (int i = 0; i < camposDeTexto.length; i++) {
 			suma = 0;
-			for (int j = 0; j < textFields[0].length; j++) {
-				suma = suma + Integer.parseInt(textFields[i][j].getText());
+			for (int j = 0; j < camposDeTexto[0].length; j++) {
+				suma = suma + Integer.parseInt(camposDeTexto[i][j].getText());
 			}
 			if (suma == tablero.getResultadosFilas()[i]) {
-				for (int j = 0; j < textFields[0].length; j++) {
-					textFields[i][j].setBackground(Color.GREEN);
+				for (int j = 0; j < camposDeTexto[0].length; j++) {
+					camposDeTexto[i][j].setBackground(Color.GREEN);
 				}
 			} else {
-				for (int j = 0; j < textFields[0].length; j++) {
-					textFields[i][j].setBackground(Color.RED);
+				for (int j = 0; j < camposDeTexto[0].length; j++) {
+					camposDeTexto[i][j].setBackground(Color.RED);
 				}
 			}
 		}
@@ -262,20 +258,19 @@ public class Juego implements ActionListener {
 
 	private void cambiarColorColumnasCorrectas() {
 		int suma;
-		for (int i = 0; i < textFields[0].length; i++) {
+		for (int i = 0; i < camposDeTexto[0].length; i++) {
 			suma = 0;
-			for (int j = 0; j < textFields.length; j++) {
-				suma = suma + Integer.parseInt(textFields[j][i].getText());
+			for (int j = 0; j < camposDeTexto.length; j++) {
+				suma = suma + Integer.parseInt(camposDeTexto[j][i].getText());
 			}
 			if (suma == tablero.getResultadosColumnas()[i]) {
-				for (int j = 0; j < textFields[0].length; j++) {
-					textFields[j][i].setBackground(Color.GREEN);
+				for (int j = 0; j < camposDeTexto[0].length; j++) {
+					camposDeTexto[j][i].setBackground(Color.GREEN);
 				}
 			} else {
-				for (int j = 0; j < textFields[0].length; j++) {
-					if (!(textFields[j][i].getBackground().equals(Color.GREEN)))
-						;
-					textFields[j][i].setBackground(Color.RED);
+				for (int j = 0; j < camposDeTexto[0].length; j++) {
+					if (!(camposDeTexto[j][i].getBackground().equals(Color.GREEN)))
+						camposDeTexto[j][i].setBackground(Color.RED);
 				}
 			}
 		}
@@ -285,18 +280,20 @@ public class Juego implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() == botonComprobar) {
+				volcarResultadosDeCamposEnTablero();
 				marcarSumasCorrectas();
-				if (utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador >= 0) {
+				if (utilidades.verificarTableroCompleto(tablero) && contador >= 0) {
 					JOptionPane.showMessageDialog(null, "Felicidades, Ganaste!", "Felicitaciones!",
 							JOptionPane.PLAIN_MESSAGE);
 					botonComprobar.setEnabled(false);
+					botonRendirse.setEnabled(false);
 				}
-				if (!utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador > 0) {
+				if (!utilidades.verificarTableroCompleto(tablero) && contador > 0) {
 					JOptionPane.showMessageDialog(null, "Intentos restantes: " + contador, "ERROR!  Sumas incorrectas",
 							JOptionPane.ERROR_MESSAGE);
 					contador--;
 				} else {
-					if (!utilidades.verificarTableroCompleto(volcarResultadosDeCampos()) && contador == 0) {
+					if (!utilidades.verificarTableroCompleto(tablero) && contador == 0) {
 						JOptionPane.showMessageDialog(null, "Las sumas son incorrectas y te quedaste sin intentos! :(",
 								"Segui participando", JOptionPane.ERROR_MESSAGE);
 						botonComprobar.setEnabled(false);
@@ -304,7 +301,7 @@ public class Juego implements ActionListener {
 				}
 			}
 
-		} catch (NumberFormatException IllegalArgumentException) {
+		} catch (NumberFormatException ex) {
 			JOptionPane.showMessageDialog(null, "El tablero aun no esta completo!!", "Advertencia",
 					JOptionPane.WARNING_MESSAGE);
 		}
@@ -320,7 +317,7 @@ public class Juego implements ActionListener {
 
 		if (e.getSource() == reiniciar) {
 			frame.dispose();
-			VentanaPrincipal nuevo = new VentanaPrincipal();
+			VentanaPrincipal nuevaVentana = new VentanaPrincipal();
 		}
 		if (e.getSource() == salir) {
 			frame.dispose();

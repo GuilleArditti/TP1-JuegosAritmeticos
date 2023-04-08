@@ -28,10 +28,10 @@ public class VentanaPrincipal implements ActionListener {
 
 	// Ventana principal menu
 	public VentanaPrincipal() {
-		initialize();
+		inicializar();
 	}
 
-	private void initialize() {
+	private void inicializar() {
 
 		// Ventana Principal
 		crearVentanaPrincipal();
