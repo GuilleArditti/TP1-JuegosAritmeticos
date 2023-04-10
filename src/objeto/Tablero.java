@@ -65,7 +65,7 @@ public class Tablero {
 		for (int i = 0; i < tablero.length; i++) {
 			suma = 0;
 			for (int j = 0; j < tablero[0].length; j++) {
-				int numero = (int) (Math.random() * 10 + 1);
+				int numero = (int)(Math.random() * 9) + 1;;
 				tablero[i][j] = numero;
 				suma = suma + numero;
 			}
@@ -82,10 +82,10 @@ public class Tablero {
 			resultadosColumnas[j] = suma;
 		}
 		setResultadosColumnas(resultadosColumnas);
-		MostrarTablero(tablero, resultadosFilas, resultadosColumnas);
+//		MostrarTablero(tablero, resultadosFilas, resultadosColumnas); 	//descomentar para ver solucion en consola al ejecutar!
 	}
 
-	private void MostrarTablero(int[][] tablero, int[] filas, int[] columnas) { // Metodo de Prueba para consola
+	private void MostrarTablero(int[][] tablero, int[] filas, int[] columnas) { // Metodo de Prueba
 		for (int i = 0; i < tablero.length; i++) {
 			System.out.print("[");
 			for (int j = 0; j < tablero[0].length; j++) {

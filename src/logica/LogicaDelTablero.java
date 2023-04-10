@@ -10,6 +10,7 @@ public class LogicaDelTablero {
 	}
 
 	private boolean sumaFilasCorrectas(Tablero t) {
+		verificarRangoNumerico(t);
 		boolean sumaCorrecta = true;
 		int suma;
 		for (int i = 0; i < t.getCuadricula().length; i++) {
@@ -33,6 +34,17 @@ public class LogicaDelTablero {
 			sumaCorrecta = sumaCorrecta && suma == t.getResultadosColumnas()[i];
 		}
 		return sumaCorrecta;
+	}
+	
+	private void verificarRangoNumerico(Tablero t) {
+		for (int i = 0; i < t.getCuadricula()[0].length; i++) {
+			for (int j = 0; j < t.getCuadricula().length; j++) {
+				if(t.getCuadricula()[i][j]>9 || t.getCuadricula()[i][j]<1) {
+					throw new IllegalArgumentException("El tablero solo admite numeros del 1 al 9!");
+				}
+			}	
+		}
+
 	}
 
 	public boolean verificarTableroCompleto(Tablero t) {
